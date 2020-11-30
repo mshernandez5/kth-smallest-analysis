@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class Main
 {
-    public static final int MINIMUM_LIST_SIZE = 10;
     public static final int MAXIMUM_LIST_SIZE = 1000;
     public static final int NUMBER_SAMPLES_PER_INPUT = 20;
     public static final int NUMBER_INPUTS_PER_SIZE = 1000;
@@ -22,7 +21,7 @@ public class Main
      * with a variety of situations for each size.
      * 
      * Randomly generated lists are generated starting
-     * at MINIMUM_LIST_SIZE and ending at MAXIMUM_LIST_SIZE.
+     * at a size of 10 and ending at MAXIMUM_LIST_SIZE.
      * Multiple inputs are generated for each size to test
      * a variety of situations (k is at start, mid, end of list, etc)
      * and this process is repeated NUMBER_CYCLES_PER_SIZE times
@@ -52,25 +51,36 @@ public class Main
          * Generate and feed inputs into registered benchmarkers,
          * which will measure and average the runtimes for each input.
          * 
-         * Inputs are generated with size n, where n begins and
-         * ends at the specified boundaries.
+         * Inputs are generated for sizes 10, 50, 100, 250, 500, 1000,
+         * etc. to the specified limit.
          * 
          * A progress bar is displayed in the console to allow the user
          * to guage the completion of the program.
          */
-        for (int size = MINIMUM_LIST_SIZE; size <= MAXIMUM_LIST_SIZE; size = size << 1)
+        int inputSize = 10;
+        int total = 0;
+        while (inputSize <= MAXIMUM_LIST_SIZE)
         {
-            int[] nums = new int[size];
+            int[] nums = new int[inputSize];
             System.out.println();
             for (int input = 0; input < NUMBER_INPUTS_PER_SIZE; input++)
             {
                 KthSmallestBenchmarker.randomizeMatrix(nums);
                 for (KthSmallestBenchmarker benchmarker : benchmarks)
                 {
-                    showProgressBar("Size " + size, 50, input, NUMBER_INPUTS_PER_SIZE);
+                    showProgressBar("Size " + inputSize, 50, input, NUMBER_INPUTS_PER_SIZE);
                     benchmarker.benchmarkInput(nums, NUMBER_SAMPLES_PER_INPUT);
                     System.gc();
                 }
+            }
+            // Move To Next Size
+            if (inputSize < 100)
+            {
+                total += inputSize = (total += 50);
+            }
+            else
+            {
+                total += inputSize = (total + 100);
             }
         }
         System.out.println("\n");
