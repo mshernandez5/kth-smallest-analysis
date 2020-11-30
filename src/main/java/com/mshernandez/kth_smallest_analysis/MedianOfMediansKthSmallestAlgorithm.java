@@ -8,7 +8,7 @@ import static com.mshernandez.kth_smallest_analysis.Utilities.swap;
  * using the median of medians method to choose an
  * optimal pivot position.
  * 
- * Theoretical Complexity: O(n^2)
+ * Theoretical Complexity: O(n)
  */
 public class MedianOfMediansKthSmallestAlgorithm extends KthSmallestAlgorithm
 {
@@ -24,11 +24,11 @@ public class MedianOfMediansKthSmallestAlgorithm extends KthSmallestAlgorithm
     {
         int start = 0;
         int end = nums.length - 1;
-        int pivotPos = selectPivot(nums, 0, end, k);
         int targetIndex = k - 1;
+        int pivotPos;
         do
         {
-            pivotPos = partition(nums, start, end, start);
+            pivotPos = partition(nums, start, end, selectPivot(nums, start, end, targetIndex));
             if (targetIndex > pivotPos)
             {
                 start = pivotPos + 1;
@@ -58,7 +58,7 @@ public class MedianOfMediansKthSmallestAlgorithm extends KthSmallestAlgorithm
             int medianIndex = base + medianOffset;
             sort(nums, base, medianIndex);
             // Insert Into Sorted Medians Array
-            medians[subset] = nums[medianIndex];
+            medians[subset] = medianIndex;
             for (int j = 0; j < subset; j++)
             {
                 if (medians[subset] < medians[j])

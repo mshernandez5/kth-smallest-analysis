@@ -21,8 +21,8 @@ public class IterativePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
     {
         int start = 0;
         int end = nums.length - 1;
-        int pivotPos = 0;
         int targetIndex = k - 1;
+        int pivotPos;
         do
         {
             pivotPos = partition(nums, start, end, start);
