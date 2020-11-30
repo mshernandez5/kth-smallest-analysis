@@ -47,24 +47,24 @@ public class KthSmallestTests
     public void firstTest(KthSmallestAlgorithm algorithm)
     {
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 1), 2);
+        assertEquals(2, algorithm.findKthSmallestElement(list, 1));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 2), 2);
+        assertEquals(2, algorithm.findKthSmallestElement(list, 2));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 3), 3);
+        assertEquals(3, algorithm.findKthSmallestElement(list, 3));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 4), 4);
+        assertEquals(4, algorithm.findKthSmallestElement(list, 4));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 5), 5);
+        assertEquals(5, algorithm.findKthSmallestElement(list, 5));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 6), 6);
+        assertEquals(6, algorithm.findKthSmallestElement(list, 6));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 7), 6);
+        assertEquals(6, algorithm.findKthSmallestElement(list, 7));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 8), 8);
+        assertEquals(8, algorithm.findKthSmallestElement(list, 8));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 9), 9);
+        assertEquals(9, algorithm.findKthSmallestElement(list, 9));
         initializeFirstInput();
-        assertEquals(algorithm.findKthElement(list, 10), 10);
+        assertEquals(10, algorithm.findKthSmallestElement(list, 10));
     }
 }

@@ -15,7 +15,7 @@ public class MergeSortKthSmallestAlgorithm extends KthSmallestAlgorithm
     }
 
     @Override
-    public int findKthElement(int[] nums, int k)
+    public int findKthSmallestElement(int[] nums, int k)
     {
         mergeSort(nums, 0, nums.length - 1);
         return nums[k - 1];

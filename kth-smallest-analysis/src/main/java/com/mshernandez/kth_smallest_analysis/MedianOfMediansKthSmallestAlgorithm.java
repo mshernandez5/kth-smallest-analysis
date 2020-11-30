@@ -16,7 +16,7 @@ public class MedianOfMediansKthSmallestAlgorithm extends KthSmallestAlgorithm
     }
 
     @Override
-    public int findKthElement(int[] nums, int k)
+    public int findKthSmallestElement(int[] nums, int k)
     {
         return 0;
     }

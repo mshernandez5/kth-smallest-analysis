@@ -27,7 +27,7 @@ public abstract class KthSmallestAlgorithm
      * @param k Which k to use when finding the kth smallest element.
      * @return The value of the kth smallest element in the list.
      */
-    public abstract int findKthElement(int[] nums, int k);
+    public abstract int findKthSmallestElement(int[] nums, int k);
 
     /**
      * Returns the name of the algorithm.

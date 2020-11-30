@@ -77,7 +77,7 @@ public class KthSmallestBenchmarker
     {
         int[] copiedNums = Arrays.copyOf(nums, nums.length);
         long startingTime = System.nanoTime();
-        algorithm.findKthElement(copiedNums, k);
+        algorithm.findKthSmallestElement(copiedNums, k);
         return System.nanoTime() - startingTime;
     }
 
