@@ -1,5 +1,7 @@
 package com.mshernandez.kth_smallest_analysis;
 
+import static com.mshernandez.kth_smallest_analysis.Utilities.swap;
+
 /**
  * Finds the kth smallest element by using the
  * partitioning procedure of the QuickSort algorithm
@@ -21,16 +23,14 @@ public class RecursivePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
     }
 
     /**
-     * Partition a section of an array around a pivot value,
-     * returning a pivot index such that all values before
-     * that index are below the pivot value and those above
-     * the pivot value are after the pivot index.
+     * Recursively partition an array until the element at
+     * the target index is in its final sorted position.
      * 
      * @param nums The array to partition.
      * @param start The start index of the section to partition.
      * @param end The end index of the section to partition.
      * @param pivotVal The value to pivot elements around.
-     * @return The location of the newly created pivot index.
+     * @return The element at the target index after sorting.
      */
     private int partition(int[] nums, int start, int end,
                           int pivotValPos, int targetIndex)
@@ -59,24 +59,5 @@ public class RecursivePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
             start = i + 1;
         }
         return partition(nums, start, end, start, targetIndex);
-    }
-    
-    /**
-     * Swap two integer elements in an array
-     * using the XOR swap method.
-     * 
-     * @param nums The array containing the elements.
-     * @param indexA The index of the first element.
-     * @param indexB The index of the second element.
-     */
-    private void swap(int[] nums, int indexA, int indexB)
-    {
-        if (nums[indexA] == nums[indexB])
-        {
-            return;
-        }
-        nums[indexA] ^= nums[indexB];
-        nums[indexB] ^= nums[indexA];
-        nums[indexA] ^= nums[indexB];
     }
 }

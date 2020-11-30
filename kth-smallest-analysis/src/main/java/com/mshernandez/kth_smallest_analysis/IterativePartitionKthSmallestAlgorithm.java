@@ -1,5 +1,7 @@
 package com.mshernandez.kth_smallest_analysis;
 
+import static com.mshernandez.kth_smallest_analysis.Utilities.swap;
+
 /**
  * Finds the kth smallest element by using the
  * partitioning procedure of the QuickSort algorithm
@@ -62,24 +64,5 @@ public class IterativePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
         }
         swap(nums, i, end);
         return i;
-    }
-    
-    /**
-     * Swap two integer elements in an array
-     * using the XOR swap method.
-     * 
-     * @param nums The array containing the elements.
-     * @param indexA The index of the first element.
-     * @param indexB The index of the second element.
-     */
-    private void swap(int[] nums, int indexA, int indexB)
-    {
-        if (nums[indexA] == nums[indexB])
-        {
-            return;
-        }
-        nums[indexA] ^= nums[indexB];
-        nums[indexB] ^= nums[indexA];
-        nums[indexA] ^= nums[indexB];
     }
 }
