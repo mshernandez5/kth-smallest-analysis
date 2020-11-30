@@ -1,18 +1,19 @@
 package com.mshernandez.kth_smallest_analysis;
 
 import java.util.List;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Scanner;
 
 public class Main
 {
-    public static final int MAXIMUM_LIST_SIZE = 1000;
+    public static final int MAXIMUM_LIST_SIZE = 100000;
     public static final int NUMBER_SAMPLES_PER_INPUT = 20;
     public static final int NUMBER_INPUTS_PER_SIZE = 1000;
 
-    public static final String OUTPUT_FILE = "data.csv";
+    public static final File OUTPUT_FILE = new File("data.csv");
 
     /**
      * Measures the runtime to find the kth smallest
@@ -47,6 +48,9 @@ public class Main
         benchmarks.add(new KthSmallestBenchmarker(new RecursivePartitionKthSmallestAlgorithm()));
         benchmarks.add(new KthSmallestBenchmarker(new MedianOfMediansKthSmallestAlgorithm()));
 
+        // Initialize Output File With Algorithm Column
+        initializeFile(benchmarks);
+
         /**
          * Generate and feed inputs into registered benchmarkers,
          * which will measure and average the runtimes for each input.
@@ -73,6 +77,8 @@ public class Main
                     System.gc();
                 }
             }
+            // Write Results To File
+            writeColumn(benchmarks, inputSize);
             // Move To Next Size
             if (inputSize < 100)
             {
@@ -84,40 +90,6 @@ public class Main
             }
         }
         System.out.println("\n");
-
-        /**
-         * Extract the runtime averages from the benchmarker objects.
-         * Save the results in a CSV file.
-         */
-        try (PrintWriter filePrintWriter = new PrintWriter(OUTPUT_FILE))
-        {
-            for (KthSmallestBenchmarker benchmarker : benchmarks)
-            {
-                filePrintWriter.print(benchmarker.getAlgorithmName() + ",");
-                Map<Integer, Double> runtimes = benchmarker.getAverageRuntimes();
-                for (int size : runtimes.keySet())
-                {
-                    filePrintWriter.print(runtimes.get(size) + ",");
-                }
-                filePrintWriter.println();
-            }
-            System.out.println("Results Saved: " + OUTPUT_FILE);
-        }
-        catch (IOException e)
-        {
-            System.out.println("Error Writing File: " + OUTPUT_FILE);
-            System.out.println("Printing Results In Console...\n");
-            for (KthSmallestBenchmarker benchmarker : benchmarks)
-            {
-                System.out.print(benchmarker.getAlgorithmName() + ",");
-                Map<Integer, Double> runtimes = benchmarker.getAverageRuntimes();
-                for (int size : runtimes.keySet())
-                {
-                    System.out.print(runtimes.get(size) + ",");
-                }
-                System.out.println();
-            }
-        }
     }
 
     /**
@@ -139,5 +111,58 @@ public class Main
             System.out.print((i < progress) ? "▓" : " ");
         }
         System.out.print("]");
+    }
+
+    public static void initializeFile(List<KthSmallestBenchmarker> benchmarkers)
+    {
+        try (PrintWriter filePrintWriter = new PrintWriter(OUTPUT_FILE))
+        {
+            filePrintWriter.println("Algorithm");
+            for (KthSmallestBenchmarker benchmarker : benchmarkers)
+            {
+                filePrintWriter.println(benchmarker.getAlgorithmName());
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error Writing File: " + OUTPUT_FILE);
+        }
+    }
+
+    public static void writeColumn(List<KthSmallestBenchmarker> benchmarkers, int size)
+    {
+        // Read Existing File Lines
+        String[] lines = new String[benchmarkers.size() + 1];
+        try (Scanner fileScanner = new Scanner(OUTPUT_FILE))
+        {
+            int index = 0;
+            while (fileScanner.hasNext())
+            {
+                lines[index++] = fileScanner.nextLine();
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error Reading File: " + OUTPUT_FILE);
+        }
+        // Append New Column To Lines
+        int line = 0;
+        lines[line++] += ", " + size;
+        for (KthSmallestBenchmarker benchmarker : benchmarkers)
+        {
+            lines[line++] += ", " + benchmarker.getAverageRuntime(size);
+        }
+        // Rewrite File
+        try (PrintWriter filePrintWriter = new PrintWriter(OUTPUT_FILE))
+        {
+            for (int i = 0; i < lines.length; i++)
+            {
+                filePrintWriter.println(lines[i]);
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error Writing File: " + OUTPUT_FILE);
+        }
     }
 }
