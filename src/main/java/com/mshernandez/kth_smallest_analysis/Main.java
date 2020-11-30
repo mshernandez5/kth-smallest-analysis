@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main
 {
-    public static final int MAXIMUM_LIST_SIZE = 100000;
+    public static final int MAXIMUM_LIST_SIZE = 1000000;
     public static final int NUMBER_SAMPLES_PER_INPUT = 20;
     public static final int NUMBER_INPUTS_PER_SIZE = 1000;
 
