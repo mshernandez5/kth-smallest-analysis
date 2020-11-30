@@ -1,5 +1,6 @@
 package com.mshernandez.kth_smallest_analysis;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -74,8 +75,9 @@ public class KthSmallestBenchmarker
      */
     public long measureRuntime(int[] nums, int k)
     {
+        int[] copiedNums = Arrays.copyOf(nums, nums.length);
         long startingTime = System.nanoTime();
-        algorithm.findKthElement(nums, k);
+        algorithm.findKthElement(copiedNums, k);
         return System.nanoTime() - startingTime;
     }
 

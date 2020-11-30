@@ -42,10 +42,10 @@ public class Main
          * with the same exact set of inputs without having to save every generated matrix.
          */
         List<KthSmallestBenchmarker> benchmarks = new ArrayList<>();
-        benchmarks.add(new KthSmallestBenchmarker(/*algo1*/));
-        benchmarks.add(new KthSmallestBenchmarker(/*algo2*/));
-        benchmarks.add(new KthSmallestBenchmarker(/*algo3*/));
-        benchmarks.add(new KthSmallestBenchmarker(/*algo4*/));
+        benchmarks.add(new KthSmallestBenchmarker(new MergeSortKthSmallestAlgorithm()));
+        benchmarks.add(new KthSmallestBenchmarker(new IterativePartitionKthSmallestAlgorithm()));
+        benchmarks.add(new KthSmallestBenchmarker(new RecursivePartitionKthSmallestAlgorithm()));
+        benchmarks.add(new KthSmallestBenchmarker(new MedianOfMediansKthSmallestAlgorithm()));
 
         /**
          * Generate and feed inputs into registered benchmarkers,

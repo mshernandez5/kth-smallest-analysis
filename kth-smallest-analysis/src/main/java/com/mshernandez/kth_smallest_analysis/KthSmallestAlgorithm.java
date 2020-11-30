@@ -21,6 +21,8 @@ public abstract class KthSmallestAlgorithm
      * In an unsorted list of n elements, this algorithm will
      * find the kth smallest element in the list.
      * 
+     * The original list may be modified by the algorithm.
+     * 
      * @param nums A list of numbers.
      * @param k Which k to use when finding the kth smallest element.
      * @return The value of the kth smallest element in the list.
