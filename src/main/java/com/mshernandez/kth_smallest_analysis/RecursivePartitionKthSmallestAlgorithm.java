@@ -19,7 +19,7 @@ public class RecursivePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
     @Override
     public int findKthSmallestElement(int[] nums, int k)
     {
-        return partition(nums, 0, nums.length - 1, 0, k - 1);
+        return select(nums, 0, nums.length - 1, 0, k - 1);
     }
 
     /**
@@ -32,8 +32,8 @@ public class RecursivePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
      * @param pivotVal The value to pivot elements around.
      * @return The element at the target index after sorting.
      */
-    private int partition(int[] nums, int start, int end,
-                          int pivotValPos, int targetIndex)
+    private int select(int[] nums, int start, int end,
+                       int pivotValPos, int targetIndex)
     {
         int pivotVal = nums[pivotValPos];
         swap(nums, pivotValPos, end);
@@ -58,6 +58,6 @@ public class RecursivePartitionKthSmallestAlgorithm extends KthSmallestAlgorithm
         {
             start = i + 1;
         }
-        return partition(nums, start, end, start, targetIndex);
+        return select(nums, start, end, start, targetIndex);
     }
 }
