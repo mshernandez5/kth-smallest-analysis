@@ -22,7 +22,7 @@ public class KthSmallestBenchmarker
     /**
      * Initializes a new benchmark object.
      * 
-     * @param algorithm The matrix multiplier to use.
+     * @param algorithm The algorithm to use.
      */
     public KthSmallestBenchmarker(KthSmallestAlgorithm algorithm)
     {
@@ -127,8 +127,8 @@ public class KthSmallestBenchmarker
     }
 
     /**
-     * Gets the name of the algorithm being
-     * used by the matrix multiplier in use.
+     * Gets the name of the algorithm associated
+     * with this benchmarker.
      * 
      * @return Name of the algoritm being used.
      */
