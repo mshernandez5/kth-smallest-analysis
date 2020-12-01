@@ -41,28 +41,28 @@ public class KthSmallestBenchmarker
      */
     public void benchmarkInput(int[] nums, int numSamples)
     {
-        long[] sampleTimes = new long[numSamples];
+        // Track Average For Input
+        RunningAverage inputAverage = new RunningAverage();
+        // Take Multiple Sample Runtimes For Each Input
         for (int sample = 0; sample < numSamples; sample++)
         {
+            // Track Average For Sample (Over Different k Values)
+            RunningAverage sampleAverage = new RunningAverage();
             // Test k = 1, n/4, n/2, 3n/4, n
             for (int fraction = 0; fraction <= 4; fraction++)
             {
                 int k = 0;
-                sampleTimes[sample] = measureRuntime(nums, (k = (nums.length * fraction) / 4) == 0 ? 1 : k);
+                sampleAverage.addData(measureRuntime(nums, (k = (nums.length * fraction) / 4) == 0 ? 1 : k));
             }
+            // Store Average Runtime For Different k Values
+            inputAverage.addData(sampleAverage.getAverage());
         }
-        double averageTimeForInput = 0.0;
-        for (long time : sampleTimes)
-        {
-            averageTimeForInput += time;
-        }
-        averageTimeForInput /= (double) numSamples;
         int inputSize = nums.length;
         if (!sizeRuntimeAverages.containsKey(inputSize))
         {
             sizeRuntimeAverages.put(inputSize, new RunningAverage());
         }
-        sizeRuntimeAverages.get(inputSize).addData(averageTimeForInput);
+        sizeRuntimeAverages.get(inputSize).addData(inputAverage.getAverage());
     }
 
     /**

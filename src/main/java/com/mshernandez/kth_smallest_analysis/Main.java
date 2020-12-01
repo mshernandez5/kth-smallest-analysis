@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main
 {
-    public static final int MAXIMUM_LIST_SIZE = 1000000;
+    public static final int MAXIMUM_LIST_SIZE = 10000000;
     public static final int NUMBER_SAMPLES_PER_INPUT = 20;
     public static final int NUMBER_INPUTS_PER_SIZE = 1000;
 
@@ -105,7 +105,7 @@ public class Main
                                        int currentCycle, int numberCycles)
     {
         int progress = (int) ((double) currentCycle / numberCycles * progressBarSize);
-        System.out.printf("\r%-10s[", label);
+        System.out.printf("\r%-12s[", label);
         for (int i = 0; i < progressBarSize; i++)
         {
             System.out.print((i < progress) ? "▓" : " ");
