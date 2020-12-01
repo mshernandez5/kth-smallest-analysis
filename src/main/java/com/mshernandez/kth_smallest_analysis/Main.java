@@ -34,13 +34,12 @@ public class Main
     public static void main(String[] args)
     {
         /**
-         * MatrixMultiplierBenchmarker objects keep track of the runtimes for
-         * their respective matrix multipliers for different input sizes.
+         * Benchmarker objects keep track of the runtimes for
+         * their respective algorithms for different input sizes.
          * 
          * Adding a benchmarker to this list registers it with the program.
-         * All registered benchmarkers will be given every set of randomly
-         * generated input matrices to test so that all multipliers are benchmarked
-         * with the same exact set of inputs without having to save every generated matrix.
+         * All registered benchmarkers will be given the same set of randomly
+         * generated inputs for consistency in comparisons.
          */
         List<KthSmallestBenchmarker> benchmarks = new ArrayList<>();
         benchmarks.add(new KthSmallestBenchmarker(new MergeSortKthSmallestAlgorithm()));
@@ -69,7 +68,7 @@ public class Main
             System.out.println();
             for (int input = 0; input < NUMBER_INPUTS_PER_SIZE; input++)
             {
-                KthSmallestBenchmarker.randomizeMatrix(nums);
+                KthSmallestBenchmarker.randomize(nums);
                 for (KthSmallestBenchmarker benchmarker : benchmarks)
                 {
                     showProgressBar("Size " + inputSize, 50, input, NUMBER_INPUTS_PER_SIZE);

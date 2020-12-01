@@ -118,7 +118,7 @@ public class KthSmallestBenchmarker
      * 
      * @param nums The number array to randomize.
      */
-    public static void randomizeMatrix(int[] nums)
+    public static void randomize(int[] nums)
     {
         for (int i = 0; i < nums.length; i++)
         {
